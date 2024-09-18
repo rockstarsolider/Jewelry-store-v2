@@ -23,7 +23,8 @@ import products.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(products.urls))
+    path('',include(products.urls)),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 if settings.DEBUG:
