@@ -44,7 +44,7 @@ class Product(models.Model):
 # Images for products
 class Image(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', verbose_name=('نام محصول'))
-    image = models.ImageField(upload_to='product/', verbose_name=('تصویر'))
+    image_field = models.ImageField(upload_to='product/', verbose_name=('تصویر'))
     uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name=('بارگذاری شده در '))
     
     class Meta:

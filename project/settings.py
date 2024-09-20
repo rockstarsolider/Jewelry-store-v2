@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "admin_interface",
+    "colorfield",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,10 +46,12 @@ INSTALLED_APPS = [
     'theme',
 
     # Third party packages
+    
     'django_cleanup.apps.CleanupConfig',
     'import_export',
     'tailwind',
     'django_browser_reload',
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -61,6 +65,9 @@ MIDDLEWARE = [
 
     # Browser auto reload middleware
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+
+    # Debug toolbar middleware
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -149,3 +156,6 @@ INTERNAL_IPS = [
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Django admin interface setting
+X_FRAME_OPTIONS = "SAMEORIGIN"

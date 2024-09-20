@@ -7,9 +7,11 @@ from .resource import ProductResource
 from django.db import models
 from django import forms
 from django.contrib.auth.models import User, Group
+from admin_interface.models import Theme
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
+admin.site.unregister(Theme)
 
 # This function translates numbers to persian. e.g. 25 => ۲۵
 def fa_num(num):
@@ -66,8 +68,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('image','product_id', 'datetime')
-    search_fields = ("product_id",'image')
+    list_display = ('image_field','product_id', 'datetime')
+    search_fields = ("product_id",'image_field')
     list_filter = ('uploaded_at','product_id')
 
     def datetime(self, obj):
