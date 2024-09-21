@@ -40,10 +40,12 @@
             </div>
         </div>
     </div>
-    <ul class="">
+    <ul class="py-20 flex items-start justify-start px-10 gap-10">
         {% for product in products %}
-            <div class="">
+            <div class="w-40">
                 <img src="media/{{product.image}}"/>
+                <h2 class="pt-4 font-medium text-lg">{{product.name}}</h2>
+                <p>{{product.price}}</p>
             </div>
         {% endfor %}
     </ul>

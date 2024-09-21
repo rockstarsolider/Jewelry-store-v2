@@ -5,7 +5,7 @@ from .models import Product
 # Create your views here.
 class HomeView(View):
     def get(self, request):
-        products = Product.objects.all().order_by('created_at')[:10]
+        products = Product.objects.all().order_by('-created_at')[:10]
         return render(request, 'products/home.html', {'products':products})
     
 
