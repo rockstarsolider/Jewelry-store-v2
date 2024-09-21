@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'tailwind',
     'django_browser_reload',
     "debug_toolbar",
+    "django_htmx",
 ]
 
 MIDDLEWARE = [
@@ -62,12 +63,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 
-    # Browser auto reload middleware
+    # Third party packages middlewares
     "django_browser_reload.middleware.BrowserReloadMiddleware",
-
-    # Debug toolbar middleware
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = 'project.urls'

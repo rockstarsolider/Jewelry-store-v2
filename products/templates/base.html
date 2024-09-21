@@ -1,4 +1,5 @@
 {% load static tailwind_tags %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
@@ -8,8 +9,11 @@
     <title>پاندورا</title>
 
     {% tailwind_css %}
+
+    <script src="{% static 'js/htmx.min.js' %}" defer></script>
 </head>
-<body>
+<body dir="rtl">
+    {% include 'home/header.html' %}
     {% block content %}
     
     {% endblock %}

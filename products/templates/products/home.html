@@ -1,5 +1,51 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    {% include 'home/header.html' %}
+<div id="home-container">
+    <!-- Hero section -->
+    <div class="flex flex-col lg:flex-row">
+        <div class="w-full lg:w-[40%] flex flex-col pt-10 lg:pt-36 px-10 lg:pr-36 2xl:pr-60 items-start order-2 lg:-order-1">
+            <h2 class="text-4xl font-medium">طلافروشی</h2>
+            <h2 class="text-4xl font-medium pt-5">پاندورا</h2>
+            <p class="pt-10 font-medium text-xl">گنجینه زیبایی ابدی</p>
+            <p class="pt-4 text-lg text-neutral-500">بهترین طلافروشی اصفهان</p>
+            <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-primary w-36 mt-8">خرید طلا</button>
+            <div class="hidden lg:block size-96 border border-primary rounded-full absolute -z-20 top-0 right-0 transform translate-x-1/2 -translate-y-1/4"></div>
+            <div class="hidden lg:block size-96 border border-primary rounded-full relative -z-20 top-0 right-0 transform -translate-x-1/2 -translate-y-1/4"></div>
+        </div>
+        <img class="w-full lg:w-[60%] lg:h-[49em] object-cover" src="{% static 'image/hero_image.webp' %}"/>
+    </div>
+    <div class="relative bg-white h-28 w-[90%] -mt-36 hidden lg:block"></div>
+
+
+    <div class="flex flex-col w-full justify-center items-center pb-10 pt-20 lg:pt-0">
+        <div>
+            <p class="text-lg">ما متخصص و متعهد به محصولات خود هستیم.</p>
+            <h2 class="text-4xl font-medium pt-4">فقط محصولات با کیفیت</h2>
+        </div>
+        <div class="flex flex-col lg:flex-row justify-between items-center w-full lg:px-20">
+            <div class="lg:pt-16 pt-8 flex flex-col lg:flex-row gap-5">
+                <img class="size-64" src="{% static 'image/hero_image.webp' %}"/>
+                <div>
+                    <h3 class="text-2xl font-medium">جواهرات طلا</h3>
+                    <p class="text-lg w-60 pt-2">مجموعه ای متنوع و پایدار از قطعات کلاسیک را پیدا کنید که به شما می‌آید و ظاهر شما را کامل می‌کند. </p>
+                    <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-neutral mt-4">دیدن محصولات بیشتر</button>
+                </div>
+            </div>
+            <div class="lg:pt-16 pt-8 carousel w-64">
+                <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
+                <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
+                <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
+            </div>
+        </div>
+    </div>
+    <ul class="">
+        {% for product in products %}
+            <div class="">
+                <img src="media/{{product.image}}"/>
+            </div>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
