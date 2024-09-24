@@ -19,35 +19,83 @@
     <div class="relative bg-white h-28 w-[90%] -mt-36 hidden lg:block"></div>
 
 
-    <div class="flex flex-col w-full justify-center items-center pb-10 pt-20 lg:pt-0">
+    <div class="flex flex-col w-full justify-center items-center pb-10 pt-20 lg:pt-0 2xl:px-[20%] lg:px-20">
         <div>
             <p class="text-lg">ما متخصص و متعهد به محصولات خود هستیم.</p>
             <h2 class="text-4xl font-medium pt-4">فقط محصولات با کیفیت</h2>
         </div>
-        <div class="flex flex-col lg:flex-row justify-between items-center w-full lg:px-20">
-            <div class="lg:pt-16 pt-8 flex flex-col lg:flex-row gap-5">
+        <div class="flex flex-col lg:flex-row justify-between items-start w-full ">
+            <div class="lg:pt-16 pt-8 flex flex-col lg:flex-row gap-5 items-center justify-center">
                 <img class="size-64" src="{% static 'image/hero_image.webp' %}"/>
-                <div>
+                <div class="w-full md:w-60 px-10 md:px-0">
                     <h3 class="text-2xl font-medium">جواهرات طلا</h3>
-                    <p class="text-lg w-60 pt-2">مجموعه ای متنوع و پایدار از قطعات کلاسیک را پیدا کنید که به شما می‌آید و ظاهر شما را کامل می‌کند. </p>
+                    <p class="text-lg  pt-2">مجموعه ای متنوع و پایدار از قطعات کلاسیک را پیدا کنید که به شما می‌آید و ظاهر شما را کامل می‌کند. </p>
                     <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-neutral mt-4">دیدن محصولات بیشتر</button>
                 </div>
             </div>
-            <div class="lg:pt-16 pt-8 carousel w-64">
-                <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
-                <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
-                <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
+            <div class="lg:pt-16 pt-16 justify-center flex flex-col items-center w-full lg:w-auto">
+                <div class="carousel w-64">  
+                    <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
+                    <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
+                    <img class="size-64 carousel-item" src="{% static 'image/ring.jpg' %}"/>
+                </div>
+                <div class="flex gap-1 justify-center pt-6">
+                    <span class="bg-neutral size-2 rounded-full"></span>
+                    <span class="bg-neutral size-2 rounded-full"></span>
+                    <span class="bg-neutral size-2 rounded-full"></span>
+                </div>
             </div>
         </div>
     </div>
-    <ul class="py-20 flex items-start justify-start px-10 gap-10">
-        {% for product in products %}
-            <div class="w-40">
-                <img src="media/{{product.image}}"/>
-                <h2 class="pt-4 font-medium text-lg">{{product.name}}</h2>
-                <p>{{product.price}}</p>
-            </div>
-        {% endfor %}
-    </ul>
+
+    <!-- Categories -->
+    <div class="flex flex-col pt-16 justify-center items-center px-10 lg:px-20 2xl:px-[20%] w-full ">
+        <p class="text-lg">دسته بندی محصولات ما</p>
+        <h2 class="text-4xl font-medium pt-4 text-center">کالکشن ها</h2>
+        <div class="flex flex-wrap w-full gap-5 justify-center pt-10">
+            {% for category in categories %}
+                <div class="flex justify-between w-80 p-3 items-start shadow-md hover:shadow-lg">
+                    <div class="flex gap-4 w-1/2 items-center">
+                        <p class='font-medium text-xl'>{{category.name}}</p>
+                        <p class="bg-neutral text-white rounded-full size-8 flex items-center justify-center">{{category.product_count}}</p>
+                    </div>
+                    <div class=" w-1/2">
+                        <img class="size-40 object-fill" src="media/{{category.image}}"/>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Products -->
+    <div class="pt-32 px-10 2xl:px-[20%] lg:px-20 w-full flex items-center flex-col">
+        <p class="text-lg">مطمعن نیستید از کجا شروع کنید؟</p>
+        <h2 class="text-4xl font-medium pt-4 text-center">جدید ترین ها</h2>
+        <ul class="flex flex-wrap items-start justify-between lg:justify-start gap-5 lg:gap-10 w-full lg:pt-12 pt-8">
+            {% for product in products %}
+                <div class="w-40 lg:w-44">
+                    <img class="h-40 lg:h-44 object-cover" src="media/{{product.image}}"/>
+                    <h2 class="pt-2 font-medium text-lg">{{product.name}}</h2>
+                    <p>{{product.formatted_price }}</p>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Gift section -->
+    <div class="pt-32 flex flex-col lg:flex-row justify-between gap-6 lg:gap-16 items-center px-10 lg:px-20 2xl:px-[20%]">
+        <div class="flex flex-col items-start order-2 lg:-order-1">
+            <p class="text-lg">مراسمی در پیش دارید؟</p>
+            <h2 class="text-3xl pt-2 text-center">یک هدیه برای آنها بگیرید</h2>
+            <p class="pt-2"> با خرید طلا و جواهرات مورد علاقه خود از فروشگاه آنلاین برتر جواهرات در دبی، انتخاب درستی انجام دهید. کانز به دلیل اعتماد و تنوع گسترده مجموعه‌های خود شناخته شده است.</p>
+            <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-primary mt-4">خرید هدیه</button>
+        </div>
+        <img class="w-full lg:w-[50%] object-fill" src="{% static 'image/gift.webp' %}"/>
+    </div>
+
+    <!-- Subscribe -->
+    <div class="pt-32">
+
+    </div>
 </div>
 {% endblock %}

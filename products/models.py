@@ -37,6 +37,10 @@ class Product(models.Model):
     def formatted_created_at(self):
         return translate_number(format_persian_datetime(convert_to_persian_calendar(self.created_at)))
     
+    @property
+    def formatted_price(self):
+        return f'{self.price:,}'
+    
     def __str__(self):
         return self.name
     
