@@ -1,0 +1,26 @@
+{% load static %}
+
+{% block content %}
+<img src="{% static 'image/home1.webp' %}" class="w-40 relative lg:left-64 bottom-6"/>
+
+<div class="flex flex-col justify-center items-center px-10 lg:px-20 2xl:px-[20%]">
+    <p class="text-lg">از آخرین به‌روزرسانی‌های مجموعه‌های ما، محتوای اختصاصی و ارتباطات مهم مطلع شوید.</p>
+    <h2 class="text-3xl pt-2 text-center">جواهرات خاص برای افراد خاص</h2>
+    <form method="post" hx-post="{% url 'number' %}" hx-target="#subscribe" hx-swap="innerHTML" class="pt-6">  
+        {% csrf_token %}  
+        {{ form.phone_number}}
+        <button type="submit" class="btn btn-primary">ثبت شماره</button>  
+    </form>  
+    <div id="response">  
+        {% if error %}   
+            <p class="text-error pt-2">{{error}}</p> 
+        {% endif %}
+        {% if message %}
+            <p class="text-success pt-2">{{message}}</p>
+        {% endif %}
+    </div>  
+</div>
+
+<img src="{% static 'image/home2.webp' %}" class="w-32 relative lg:right-64 top-5"/>
+
+{% endblock %}

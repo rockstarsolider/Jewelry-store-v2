@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Image, Video
+from .models import Category, Product, Image, Video, PhoneNumber
 from custom_translate.templatetags.persian_calendar_convertor import convert_to_persian_calendar ,format_persian_datetime
 from custom_translate.templatetags.custom_translation_tags import translate_number
 from import_export.admin import ImportExportModelAdmin
@@ -91,3 +91,4 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(Video, VideoAdmin)
+admin.site.register(PhoneNumber)

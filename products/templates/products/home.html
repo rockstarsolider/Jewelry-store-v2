@@ -10,7 +10,11 @@
             <h2 class="text-4xl font-medium pt-5">پاندورا</h2>
             <p class="pt-10 font-medium text-xl">گنجینه زیبایی ابدی</p>
             <p class="pt-4 text-lg text-neutral-500">بهترین طلافروشی اصفهان</p>
-            <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-primary w-36 mt-8">خرید طلا</button>
+            <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-primary w-36 mt-8">خرید طلا
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg> 
+            </button>
             <div class="hidden lg:block size-96 border border-primary rounded-full absolute -z-20 top-0 right-0 transform translate-x-1/2 -translate-y-1/4"></div>
             <div class="hidden lg:block size-96 border border-primary rounded-full relative -z-20 top-0 right-0 transform -translate-x-1/2 -translate-y-1/4"></div>
         </div>
@@ -30,7 +34,11 @@
                 <div class="w-full md:w-60 px-10 md:px-0">
                     <h3 class="text-2xl font-medium">جواهرات طلا</h3>
                     <p class="text-lg  pt-2">مجموعه ای متنوع و پایدار از قطعات کلاسیک را پیدا کنید که به شما می‌آید و ظاهر شما را کامل می‌کند. </p>
-                    <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-neutral mt-4">دیدن محصولات بیشتر</button>
+                    <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-neutral mt-4">دیدن محصولات بیشتر
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                        </svg> 
+                    </button>
                 </div>
             </div>
             <div class="lg:pt-16 pt-16 justify-center flex flex-col items-center w-full lg:w-auto">
@@ -83,19 +91,41 @@
     </div>
 
     <!-- Gift section -->
-    <div class="pt-32 flex flex-col lg:flex-row justify-between gap-6 lg:gap-16 items-center px-10 lg:px-20 2xl:px-[20%]">
+    <div class="pt-36 flex flex-col lg:flex-row justify-between gap-6 lg:gap-16 items-center px-10 lg:px-20 2xl:px-[20%]">
         <div class="flex flex-col items-start order-2 lg:-order-1">
             <p class="text-lg">مراسمی در پیش دارید؟</p>
             <h2 class="text-3xl pt-2 text-center">یک هدیه برای آنها بگیرید</h2>
             <p class="pt-2 text-lg"> با خرید طلا و جواهرات مورد علاقه خود از فروشگاه آنلاین برتر جواهرات در دبی، انتخاب درستی انجام دهید. کانز به دلیل اعتماد و تنوع گسترده مجموعه‌های خود شناخته شده است.</p>
-            <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-primary mt-4">خرید هدیه</button>
+            <button hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true" class="btn btn-neutral mt-4">خرید هدیه
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>                  
+            </button>
         </div>
         <img class="w-full lg:w-[50%] object-fill" src="{% static 'image/gift.webp' %}"/>
     </div>
 
     <!-- Subscribe -->
-    <div class="pt-32">
-
+    <div class="pt-36 w-full flex flex-col justify-center items-center" id="subscribe">
+        {% include 'home/phone_number_form.html' %}>
     </div>
+
+    <!-- Aboat Us Section -->
+    <div class="mt-32 px-10 py-24 w-full flex flex-col justify-center items-start lg:px-20 2xl:px-[20%]" style="background-image: url('static/image/home3.jpg');">
+        <div class="p-10 flex flex-col justify-center items-start bg-primary text-white max-w-96 rounded-xl">
+            <h2 class="font-medium text-3xl">ما چه کسی هستیم</h2>
+            <p class="text-lg pt-2"> جواهرات پاندورا در سال ۱۹۹۱ توسط آقای انیل داناک تأسیس شد. آقای داناک، پیشگام این عرصه با سابقه تجاری بسیار غنی، تا قبل از تأسیس کَنز، مدیریت کسب‌وکار مشترک خانوادگی جواهرات خود را در دبی بر عهده داشت. سپس، کاملاً به تنهایی و از صفر، شرکت پاندورا را راه‌اندازی کرد.</p>
+            <button hx-get="{% url 'about' %}" hx-target="body" hx-push-url="true" class="btn mt-4">
+                خواندن درباره ما
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg> 
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    {% include 'home/footer.html' %}
+    
 </div>
 {% endblock %}

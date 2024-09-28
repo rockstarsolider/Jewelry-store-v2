@@ -65,3 +65,11 @@ class Video(models.Model):
     class Meta:
         verbose_name_plural = "ویدیو ها"
         verbose_name = "ویدیو"
+
+# Saves user phone number for announcements
+class PhoneNumber(models.Model):  
+    phone_number = models.CharField(max_length=15, unique=True) 
+    added_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):  
+        return self.phone_number
