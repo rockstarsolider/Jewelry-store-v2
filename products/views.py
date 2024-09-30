@@ -28,6 +28,7 @@ class AboutUsView(View):
         return render(request, 'products/about_us.html')
     
 
+# Detail of a product
 class ProductView(View):
     def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)

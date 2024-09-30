@@ -2,13 +2,54 @@
 
 {% block content %}
 <div>
-    <div>
-        <!-- Product detail -->
-        <div>
-            
+    <div class="flex flex-col lg:flex-row justify-center lg:justify-between px-6 lg:px-12 2xl:px-[20%] pt-12">
+        <!-- Product media -->
+        <div class="w-full lg:w-[45%]">
+            <img class="w-full" src="/media/{{product.image}}"/>
+        </div>
+
+        <!-- Product Detail -->
+        <div class="flex flex-col items-start justify-start lg:w-1/2 gap-4">
+            <h2 class="text-3xl font-medium pt-4">{{product.name}}</h2>
+            <p class="font-medium">{{product.formatted_price}} تومان </p>
+            <p>{{product.description}}</p>
+            <button class="btn btn-primary w-96" onclick="my_modal_2.showModal()">خرید محصول</button>
+
+            <div class="overflow-x-auto">
+                <div class="w-96 border-x-2 border-t-2 text-lg font-medium p-3">توضیحات محصول</div>
+                <table class="table border-2 w-96">
+                  <tbody>
+                    <tr><th>نوع محصول</th><td>{{product.category_id}}</td></tr>
+                    <tr><th>جنس</th><td>{% if product.material %} {{product.material}} {% endif %}</td></tr>
+                    <tr><th>عیار</th><td>{% if product.carat %} {{product.carat}} {% endif %}</td></tr>
+                    <tr><th>وزن</th><td>{% if product.weight %} {{product.weight}} {% endif %}</td></tr>
+                    <tr><th>رنگ</th><td>{% if product.color %} {{product.color}} {% endif %}</td></tr>
+                  </tbody>
+                </table>
+            </div>
+            <p class="w-96 text-center">قبل از خرید قوانین <span class="underline cursor-pointer">مرجوعی</span> و <span class="underline cursor-pointer">ارسال</span> را مطالعه کنید</p>
+            <div class="flex justify-center items-center gap-4 w-96">
+                <a href="https://twitter.com/share?url=http://127.0.0.1:8000/product/{{product.id}}/&text={{product.name}}"><?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve"><path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z"/></svg></a>
+                <a href="https://telegram.me/share/url?url=http://127.0.0.1:8000/product/{{product.id}}/&text={{product.name}}"><svg width="24px" height="24px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><title>Telegram icon</title><path d="M23.91 3.79L20.3 20.84c-.25 1.21-.98 1.5-2 .94l-5.5-4.07-2.66 2.57c-.3.3-.55.56-1.1.56-.72 0-.6-.27-.84-.95L6.3 13.7l-5.45-1.7c-1.18-.35-1.19-1.16.26-1.75l21.26-8.2c.97-.43 1.9.24 1.53 1.73z"/></svg></a>
+            </div>
+
+            <!-- Modal for buy product button -->
+            <dialog id="my_modal_2" class="modal">
+                <div class="modal-box">
+                    <h3 class="text-lg font-bold">خرید محصول</h3>
+                    <p class="py-4">جهت خرید محصول به ما در واتساپ یا اینستاگرام پیام دهید</p>
+                    <p class="font-medium">شماره تماس: 09123456789</p>
+                    <div class="flex gap-2">
+                        <button class="btn btn-primary mt-3">اینستاگرام</button>
+                        <button class="btn btn-neutral mt-3">واتساپ</button>
+                    </div>
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </div>
     </div>
-    {{product}}
 
     <!-- Footer -->
     {% include 'home/footer.html' %}

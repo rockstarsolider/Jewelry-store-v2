@@ -27,11 +27,11 @@ urlpatterns = [
     
     path('',include(products.urls)),
     path("__reload__/", include("django_browser_reload.urls")),
-] + debug_toolbar_urls() 
+] + debug_toolbar_urls()
 
 urlpatterns += i18n_patterns(  
-    path('i18n/', include('django.conf.urls.i18n')),  
-    path('admin/', admin.site.urls), 
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('admin/', admin.site.urls),
 )  
 
 if settings.DEBUG:
