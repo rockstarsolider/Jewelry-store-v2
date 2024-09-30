@@ -8,6 +8,7 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import User, Group
 from admin_interface.models import Theme
+from django.utils.html import format_html
 
 admin.site.unregister(User)
 admin.site.unregister(Group)
@@ -20,7 +21,7 @@ def fa_num(num):
 
 class ProductAdmin(ImportExportModelAdmin):
     search_fields = ("name", 'id', 'description', 'price', 'created_at')
-    list_display = ('pid', 'name', 'formatted_price', 'category_id', 'formatted_created_at')
+    list_display = ('image_tag', 'pid', 'name', 'formatted_price', 'category_id', 'formatted_created_at')
     list_display_links = ('pid', 'name',)
     list_filter = ('category_id', 'created_at')
     actions = ('delete_image', 'set_price_to_zero',)
@@ -54,6 +55,10 @@ class ProductAdmin(ImportExportModelAdmin):
         models.IntegerField: {'widget': forms.NumberInput(attrs={'size': '50'})},
         models.TextField: {"widget": forms.Textarea()},
     }
+
+    def image_tag(self,obj):
+        return format_html('<img src="{0}" style="width: 32px; height:32px;" />'.format(obj.image.url))
+    image_tag.short_description = 'تصویر'
 
 
 class CategoryAdmin(admin.ModelAdmin):

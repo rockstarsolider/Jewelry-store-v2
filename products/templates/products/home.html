@@ -79,15 +79,7 @@
     <div class="pt-32 px-10 2xl:px-[20%] lg:px-20 w-full flex items-center flex-col">
         <p class="text-lg">مطمعن نیستید از کجا شروع کنید؟</p>
         <h2 class="text-4xl font-medium pt-4 text-center">جدید ترین ها</h2>
-        <ul class="flex flex-wrap items-start justify-between lg:justify-start gap-5 lg:gap-10 w-full lg:pt-12 pt-8">
-            {% for product in products %}
-                <div hx-get="{% url 'product' product.id %}" hx-target="body" hx-push-url="true" class="w-40 lg:w-44 cursor-pointer">
-                    <img class="h-40 lg:h-44 object-cover" src="media/{{product.image}}"/>
-                    <h2 class="pt-2 font-medium text-lg">{{product.name}}</h2>
-                    <p>{{product.formatted_price }}</p>
-                </div>
-            {% endfor %}
-        </ul>
+        {% include 'partial/products_list.html' %}
     </div>
 
     <!-- Gift section -->

@@ -32,7 +32,13 @@ class AboutUsView(View):
 class ProductView(View):
     def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
-        return render(request, 'products/product.html', {'product': product})
+        related_products = Product.objects.all().filter(category_id = product.category_id).order_by('-created_at')[:20]
+        context = {
+            'product': product,
+            'products': related_products,
+            'form': PhoneNumberForm()
+        }
+        return render(request, 'products/product.html', context)
 
 
 class PhoneNumberView(View):
