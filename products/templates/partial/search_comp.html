@@ -1,0 +1,7 @@
+<div class="flex gap-3 items-center fixed bg-base-200 rounded-sm m-2 p-2 pl-4">
+    {% for item in search %}
+        <img class="size-12" src="/media/{{item.image}}"/>
+        <p class="font-medium text-lg">{{item.name}}</p>
+        <p>{{item.formatted_price}}</p>
+    {% endfor %}
+</div>

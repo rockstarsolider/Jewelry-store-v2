@@ -1,5 +1,80 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2 class="text-2xl">محصولات</h2>
+<div class=" pt-12">
+    <!-- Title -->
+    <h2 class="font-medium text-3xl w-full text-center">محصولات</h2>
+    <div class="breadcrumbs text-sm w-full flex items-center justify-center">
+        <ul>
+            <li><a hx-get="{% url 'home' %}" hx-target="body" hx-push-url="true">خانه</a></li>
+            <li><a class="text-primary">محصولات</a></li>
+        </ul>
+    </div>
+
+    <div class="flex flex-col lg:flex-row px-6 lg:px-12 2xl:px-[20%] gap-5">
+        <!-- Category Filter --> 
+        <select id="category-filter" class="select select-bordered max-w-56"   
+                name="category"
+                onchange="updateURL()">  
+                <option value="" selected>همه دسته بندی ها</option> 
+            {% for category in categories %}  
+            <option value="{{ category.name }}" {% if selected_category == category.name %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}  
+        </select>
+
+        <!-- Order By Filter -->  
+        <select id="order-select" class="select select-bordered max-w-56 ml-4"   
+                name="order"
+                onchange="updateURL()">  
+            <option value="-created_at" {% if order == '-created_at' %}selected{% endif %}>جدیدترین</option>  
+            <option value="created_at" {% if order == 'created_at' %}selected{% endif %}>قدیمی‌ترین</option>  
+            <option value="price" {% if order == 'price' %}selected{% endif %}>کمترین قیمت</option>  
+            <option value="-price" {% if order == '-price' %}selected{% endif %}>بیشترین قیمت</option>  
+        </select> 
+    </div>
+
+    <!-- Products -->
+    <div class="px-6 lg:px-12 2xl:px-[20%] flex flex-col items-center" id="product_con">
+        {% include 'partial/products_list.html'  %}
+    </div>
+
+    <!-- Subscribe -->
+    <div class="pt-28 pb-10 w-full flex flex-col justify-center items-center" id="subscribe">
+        {% include 'home/phone_number_form.html' %}
+    </div>
+
+    {% include 'home/footer.html' %}
+</div>
+
+<script>  
+    function updateURL() {  
+        const category = document.getElementById('category-filter').value;  
+        const order = document.getElementById('order-select').value;  
+
+        // Create a new URL object with the current location's origin  
+        const url = new URL(window.location);  
+
+        // Set or update the category parameter  
+        if (category) {  
+            url.searchParams.set('category', category);  
+        } else {  
+            url.searchParams.delete('category');  
+        }  
+
+        // Set or update the order parameter  
+        if (order) {  
+            url.searchParams.set('order', order);  
+        } else {  
+            url.searchParams.delete('order');  
+        }  
+
+        // Replace the URL in the browser  
+        window.history.pushState({}, '', url);  
+
+        // Trigger the HTMX request to fetch new products  
+        var productsUrl = "{% url 'products' %}?" + url.searchParams.toString();  
+        htmx.ajax('GET', productsUrl, { target: '#product-list' });  
+    }  
+</script> 
+
 {% endblock %}

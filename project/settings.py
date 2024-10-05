@@ -47,13 +47,14 @@ INSTALLED_APPS = [
     'theme',
 
     # Third party packages
-    
     'django_cleanup.apps.CleanupConfig',
     'import_export',
     'tailwind',
     'django_browser_reload',
     "debug_toolbar",
     "django_htmx",
+    'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

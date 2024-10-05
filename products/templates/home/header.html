@@ -32,8 +32,10 @@
     <svg id="hamburger" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 cursor-pointer block lg:hidden">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
     </svg>   
-    <input class="input input-bordered input-sm" placeholder="جستجو ..."/>
-    
+    <input  class="input input-bordered input-sm" 
+            id="search"
+            placeholder="جستجو ..."
+            />
 
     <div class="items-center justify-center gap-3 lg:gap-5 hidden lg:flex">
         <a hx-get="{% url 'home' %}" hx-target="body" hx-push-url="true" class="font-medium cursor-pointer">خانه</a>
@@ -41,6 +43,9 @@
         <a hx-get="{% url 'about' %}" hx-target="body" hx-push-url="true" class="font-medium cursor-pointer">درباره ما</a>
     </div>
     <img src="{% static 'image/logo.png' %}" class="-mb-6"/>
+</div>
+<div id="search_con">
+
 </div>
 
 <!-- Side menu -->
@@ -71,3 +76,14 @@
         menu.classList.toggle('hidden')
     })
 </script>
+
+<script>  
+    function updateURL() {  
+        const search = document.getElementById('search');
+        search.addEventListener('change', () =>{
+            console.log(search)
+            var productsUrl = `{% url 'search' '${search.value}' %}`
+            htmx.ajax('GET', productsUrl, { target: '#search_con' });  
+        })
+    }  
+</script> 

@@ -4,6 +4,7 @@ from .models import Product, Category
 from django.db import models
 from .forms import PhoneNumberForm  
 from .models import PhoneNumber
+from django.http import JsonResponse
 
 # Create your views here.
 class HomeView(View):
@@ -18,9 +19,22 @@ class HomeView(View):
         return render(request, 'products/home.html', context)
     
 
-class ProductsView(View):
+class ProductsView(View):   # Products page
     def get(self, request):
-        return render(request, 'products/products.html')
+        selected_category = request.GET.get('category')
+        order = request.GET.get('order', '-created_at')  # Default to 'latest' if not specified
+        products = Product.objects.all().order_by(order)
+        categories = Category.objects.all()[:20]
+        if selected_category:  
+            products = products.filter(category_id__name=selected_category)
+        context = {
+            'form': PhoneNumberForm(),
+            'products': products,
+            'categories': categories,
+            'selected_category': selected_category or '',
+            'order': order
+        }
+        return render(request, 'products/products.html', context)
     
 
 class AboutUsView(View):
@@ -55,3 +69,9 @@ class PhoneNumberView(View):
         else:
             message = 'شماره تلفن باید حداقل 11 رقم باشد!'
             return render(request, 'home/phone_number_form.html', {'error': message, 'form': form})
+
+
+class SearchProducts(View):
+    def get(self, request, search_text):
+        search = Product.objects.filter(name__icontains=search_text)
+        return render(request, 'partial/search_comp.html', {'search':search})
