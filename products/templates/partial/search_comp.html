@@ -1,7 +1,13 @@
-<div class="flex gap-3 items-center fixed bg-base-200 rounded-sm m-2 p-2 pl-4">
+{% if search %}
+<div class="flex flex-col items-center fixed m-2 border">
     {% for item in search %}
-        <img class="size-12" src="/media/{{item.image}}"/>
-        <p class="font-medium text-lg">{{item.name}}</p>
-        <p>{{item.formatted_price}}</p>
+        <div class="flex justify-between gap-3 items-center bg-white rounded-sm p-1 w-[350px] border-b-2">
+            <div hx-get="{% url 'product' item.id %}" hx-target="body" hx-push-url="true" class="flex gap-3 items-center cursor-pointer">
+                <img class="size-12" src="/media/{{item.image}}"/>
+                <p class="font-medium text-lg">{{item.name}}</p>
+            </div>
+            <p>{{item.formatted_price}}</p>
+        </div>
     {% endfor %}
 </div>
+{% endif %}

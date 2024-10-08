@@ -73,5 +73,5 @@ class PhoneNumberView(View):
 
 class SearchProducts(View):
     def get(self, request, search_text):
-        search = Product.objects.filter(name__icontains=search_text)
+        search = Product.objects.filter(name__contains=search_text)
         return render(request, 'partial/search_comp.html', {'search':search})

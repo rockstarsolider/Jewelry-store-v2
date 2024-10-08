@@ -44,7 +44,7 @@
     </div>
     <img src="{% static 'image/logo.png' %}" class="-mb-6"/>
 </div>
-<div id="search_con">
+<div id="search_con" class="z-50 hidden">
 
 </div>
 
@@ -77,13 +77,35 @@
     })
 </script>
 
-<script>  
-    function updateURL() {  
-        const search = document.getElementById('search');
-        search.addEventListener('change', () =>{
-            console.log(search)
-            var productsUrl = `{% url 'search' '${search.value}' %}`
-            htmx.ajax('GET', productsUrl, { target: '#search_con' });  
-        })
-    }  
+<script>   
+    var search = document.getElementById('search');
+    var searchCon = document.getElementById('search_con');
+
+    function isBlank(str) {
+        return (!str || /^\s*$/.test(str));
+    }
+
+    var getProducts = () => {
+        search.addEventListener('input', (e) =>{
+        // checks if search text is empty
+        if(isBlank(search.value)){
+            searchCon.innerHTML = ''
+        } else {
+            var productsUrl = `/search/${search.value}`
+            htmx.ajax('GET', productsUrl, { target: '#search_con' }); 
+        }
+    })}
+
+    search.addEventListener('focus', () => {
+        getProducts()
+        document.getElementsByTagName('body')[0].classList.add('overflow-hidden')
+        searchCon.classList.remove('hidden')
+    })
+
+    search.addEventListener('focusout', () => {
+        setTimeout(() => {
+            document.getElementsByTagName('body')[0].classList.add('overflow-visible')
+            searchCon.classList.add('hidden')
+        }, 100)
+    })
 </script> 

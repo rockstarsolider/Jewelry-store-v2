@@ -2,7 +2,14 @@
 
 {% block content %}
 <div>
-    <div class="flex flex-col lg:flex-row justify-center lg:justify-between px-6 lg:px-12 2xl:px-[20%] pt-12">
+    <div class="breadcrumbs text-sm w-full flex items-center justify-center py-6">
+        <ul>
+            <li><a hx-get="{% url 'home' %}" hx-target="body" hx-push-url="true">خانه</a></li>
+            <li><a hx-get="{% url 'products' %}" hx-target="body" hx-push-url="true">محصولات</a></li>
+            <li><a class="text-primary">{{product.name}}</a></li>
+        </ul>
+    </div>
+    <div class="flex flex-col lg:flex-row justify-center lg:justify-between px-6 lg:px-12 2xl:px-[20%]">
         <!-- Product media -->
         <div class="w-full lg:w-[45%]">
             <img class="w-full" src="/media/{{product.image}}"/>
