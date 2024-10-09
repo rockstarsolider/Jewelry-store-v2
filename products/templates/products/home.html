@@ -62,7 +62,7 @@
         <h2 class="text-4xl font-medium pt-4 text-center">کالکشن ها</h2>
         <div class="flex flex-wrap w-full gap-5 justify-center pt-10">
             {% for category in categories %}
-                <div class="flex justify-between w-80 p-3 items-start shadow-md hover:shadow-lg">
+                <div hx-get="{% url 'products' %}?category={{category.name}}" hx-target="body" hx-push-url="true" class="flex justify-between w-80 p-3 items-start shadow-md hover:shadow-lg">
                     <div class="flex gap-4 w-1/2 items-center">
                         <p class='font-medium text-xl'>{{category.name}}</p>
                         <p class="bg-neutral text-white rounded-full size-8 flex items-center justify-center">{{category.product_count}}</p>
@@ -119,5 +119,7 @@
     <!-- Footer -->
     {% include 'home/footer.html' %}
 
+    <!-- Question form -->
+    {% include 'question_modal.html' %}
 </div>
 {% endblock %}

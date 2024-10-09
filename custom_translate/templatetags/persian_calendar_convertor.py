@@ -62,4 +62,4 @@ def format_persian_date(persian_datetime):
     persian_year = persian_datetime.year
     persian_weekday = datetime(persian_datetime.year,persian_datetime.month,persian_datetime.day).weekday()
 
-    return f"{persian_day_names[persian_weekday]} {persian_day} {persian_month} {persian_year}"
+    return f"{persian_day} {persian_month} {persian_year}"

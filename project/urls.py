@@ -18,14 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-import products
+import products, questions
 import products.urls
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.conf.urls.i18n import i18n_patterns
 
+import questions.urls
+
 urlpatterns = [
     
     path('',include(products.urls)),
+    path('',include(questions.urls)),
     path("__reload__/", include("django_browser_reload.urls")),
 ] + debug_toolbar_urls()
 

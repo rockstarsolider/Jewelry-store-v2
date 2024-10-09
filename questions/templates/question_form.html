@@ -1,0 +1,29 @@
+{% load widget_tweaks %}
+
+<form id="question_form" method="post" hx-post="{% url 'question' %}" hx-target="#question_form">  
+    {% csrf_token %}  
+    <div>  
+        <label class=" pb-2">شماره تلفن:</label>  
+        {% render_field form.phone_number class="input input-bordered w-full" %}  
+    </div>  
+    <div class="mt-3">  
+        <label>سوال شما:</label>  
+        {% render_field form.question_text class="textarea textarea-bordered w-full" %}  
+    </div> 
+    <div class="mt-2">  
+        <button type="submit" class="btn btn-primary">ثبت سوال</button>  
+    </div>  
+    <div id="form-response" class="mt-3">  
+        {% if success %}  
+            <p style="color:green;">پرسش شما با موفقیت ثبت شد!</p>  
+        {% endif %}  
+        {% for field in form %}  
+            {% for error in field.errors %}  
+                <p style="color:red;">{{ error }}</p>  
+            {% endfor %}  
+        {% endfor %}  
+        {% for error in form.non_field_errors %}  
+            <p style="color:red;">{{ error }}</p>  
+        {% endfor %}  
+    </div>  
+</form>  

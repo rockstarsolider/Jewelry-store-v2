@@ -1,0 +1,18 @@
+{% load static %}
+
+<img src="{% static 'image/ask.png' %}" 
+    class="size-16 fixed bottom-36 cursor-pointer rounded-full bg-white"
+    onclick="my_modal_4.showModal()"/>
+
+<dialog id="my_modal_4" class="modal">
+    <div class="modal-box">
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute left-2 top-2">✕</button>
+        </form>
+        <h3 class="text-lg font-bold">پرسش و پیشنهادات</h3>
+        <p class="py-4">شما میتوانید سوالات و پیشنهادات خود را برای ما بفرستید. ما در اسرع وقت با شما تماس خواهیم گرفت.</p>
+        <div id="form_container" hx-get="{% url 'question' %}" hx-trigger="revealed">
+
+        </div>
+    </div>
+</dialog>

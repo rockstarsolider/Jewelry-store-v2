@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<script>  
+    document.addEventListener("DOMContentLoaded", function() {  
+        window.scrollTo(0, 0);  
+    });  
+</script>
 <div>
     <div class="breadcrumbs text-sm w-full flex items-center justify-center py-6">
         <ul>
@@ -90,5 +95,8 @@
 
     <!-- Footer -->
     {% include 'home/footer.html' %}
+
+    <!-- Question form -->
+    {% include 'question_modal.html' %}
 </div>
 {% endblock %}

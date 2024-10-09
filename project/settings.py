@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.utils.translation import gettext_lazy as _  
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     # Apps in project root directory
     'products',
     'theme',
+    'questions',
 
     # Third party packages
     'django_cleanup.apps.CleanupConfig',
@@ -162,3 +164,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Django admin interface setting
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
+# Languages available on admin page
+LANGUAGES = [  
+    ('fa', _('Farsi')),  
+    ('en', _('English')),   
+]  
