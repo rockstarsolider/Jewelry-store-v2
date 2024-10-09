@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404  
 from django.views import View
-from .models import Product, Category
+from .models import Product, Category, Image, Video
 from django.db import models
 from .forms import PhoneNumberForm  
 from .models import PhoneNumber
@@ -46,11 +46,15 @@ class AboutUsView(View):
 class ProductView(View):
     def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
-        related_products = Product.objects.all().filter(category_id = product.category_id).order_by('-created_at')[:20]
+        images = Image.objects.filter(product_id=product)
+        videos = Video.objects.filter(product_id=product)
+        related_products = Product.objects.filter(category_id = product.category_id).order_by('-created_at')[:20]
         context = {
             'product': product,
             'products': related_products,
-            'form': PhoneNumberForm()
+            'form': PhoneNumberForm(),
+            'images': images,
+            'videos': videos
         }
         return render(request, 'products/product.html', context)
 

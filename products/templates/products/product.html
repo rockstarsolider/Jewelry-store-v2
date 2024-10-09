@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<script>  
-    document.addEventListener("DOMContentLoaded", function() {  
-        window.scrollTo(0, 0);  
-    });  
-</script>
 <div>
     <div class="breadcrumbs text-sm w-full flex items-center justify-center py-6">
         <ul>
@@ -16,8 +11,32 @@
     </div>
     <div class="flex flex-col lg:flex-row justify-center lg:justify-between px-6 lg:px-12 2xl:px-[20%]">
         <!-- Product media -->
-        <div class="w-full lg:w-[45%]">
-            <img class="w-full" src="/media/{{product.image}}"/>
+        <div class="w-full lg:w-[45%]"> 
+            <div class="relative">  
+                <!-- Carousel Main Image -->  
+                <div id="main_image_con" class="overflow-hidden">  
+                    <img id="main-image" class="mx-auto object-cover w-full h-96 transition-opacity duration-300" src="/media/{{ product.image }}">  
+                </div> 
+            </div>  
+        
+            <!-- Thumbnails -->  
+            <div class="flex gap-2 mt-4 w-full overflow-x-auto">  
+                <img class="thumbnail cursor-pointer w-28 h-28 object-cover rounded-lg border transition-transform duration-300 hover:scale-110"   
+                        src="/media/{{ product.image }}"   
+                        onclick="changeImage('/media/{{ product.image }}','image')"> 
+                
+                {% for image in images %}  
+                    <img class="thumbnail cursor-pointer w-28 h-28 object-cover rounded-lg border transition-transform duration-300 hover:scale-110"   
+                        src="{{ image.image_field.url }}"   
+                        onclick="changeImage('{{ image.image_field.url }}','image')">  
+                {% endfor %}  
+                
+                {% for video in videos %}  
+                    <video onclick="changeImage('{{ video.video.url }}','video')" class="thumbnail cursor-pointer w-28 h-28 object-cover rounded-lg border transition-transform duration-300 hover:scale-110">
+                        <source src="{{video.video.url}}" type="video/mp4">
+                    </video> 
+                {% endfor %}  
+            </div>   
         </div>
 
         <!-- Product Detail -->
@@ -95,8 +114,23 @@
 
     <!-- Footer -->
     {% include 'home/footer.html' %}
-
-    <!-- Question form -->
-    {% include 'question_modal.html' %}
 </div>
+
+<script>  
+    // JavaScript to handle image change with thumbnails  
+    const currentIndex = 0;  
+    const images = '{% for image in images %}<img src="/media/{{ image.image_field }}"/>,{% endfor %}'
+
+    function changeImage(imageUrl, type) {  
+        const mainImageCon = document.getElementById('main_image_con')  
+        if (type == 'video'){
+            mainImageCon.innerHTML = 
+                `<video controls autoplay onclick="changeImage('${imageUrl}')" class="mx-auto object-cover w-full h-96 transition-opacity duration-300">
+                    <source src="${imageUrl}" type="video/mp4">
+                </video> `
+        } else if (type == 'image') {
+            mainImageCon.innerHTML = `<img id="main-image" class="mx-auto object-cover w-full h-96 transition-opacity duration-300" src="${imageUrl}">`
+        }
+    }  
+</script>  
 {% endblock %}
