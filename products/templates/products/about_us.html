@@ -1,8 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h2 class="text-2xl">درباره ما</h2>
+<div class="">
+    <div class="flex flex-col justify-center items-center px-10 lg:px-20 2xl:px-[20%]">
+        <h2 class="text-4xl font-medium pt-32">درباره ما</h2>
+        <p class="text-lg text-center pt-32 max-w-96 lg:max-w-xl">
+            <span hx-get="{% url 'home' %}" hx-target="body" hx-push-url="true" class="text-primary cursor-pointer">جواهرات پاندورا</span>
+            در سال ۱۹۹۱ توسط آقای انیل داناک تأسیس شد. آقای داناک، پیشگام این عرصه با سابقه تجاری بسیار غنی، تا قبل از تأسیس پاندورا مدیریت کسب‌وکار مشترک خانوادگی جواهرات خود را در دبی بر عهده داشت. سپس، کاملاً به تنهایی و از صفر، شرکت پاندورا را راه‌اندازی کرد.
+        </p>
+    </div>
 
-    <!-- Question form -->
-    {% include 'question_modal.html' %}
+    <div class="flex flex-col lg:flex-row gap-10 items-start justify-between pt-32 pb-2 px-10 lg:px-20 2xl:px-[20%]">
+        <p class="lg:w-1/2 font-medium text-2xl">پاندورا با طراحی محصولات و تنوع جواهرات خود، کیفیت ساخت و خدمات عالی به مشتریان، به یک برند ماندگار تبدیل شده است.</p>
+        <p class="lg:w-1/2 text-lg">هر قطعه کانز یک اثر هنری منحصر به فرد است و با قطعه دیگر متفاوت است. آنچه کانز را از سایر برندها متمایز می کند، این است که هر قطعه به صورت دستی انتخاب و با توجه به سلیقه شما شخصی سازی می شود.</p>
+    </div>
+
+    <div class="mt-32 px-10 py-36 w-full flex flex-col justify-center items-center" style="background-image: url('/static/image/home3.jpg');">
+        <div class="p-10 flex flex-col justify-center items-start bg-primary text-white max-w-96 rounded-xl">
+            <p>
+                پاندورا با تنها پنج نفر در بازار طلای تهران آغاز به کار کرد و امروزه دارای هفت شعبه در بازار تهران و حتی یک کارگاه ویژه برای تولید جواهرات خود است.
+            </p>
+        </div>
+    </div>
+</div>
+    
+<!-- Footer -->
+{% include 'home/footer.html' %}
+
+<!-- Question form -->
+{% include 'question_modal.html' %}
 {% endblock %}
