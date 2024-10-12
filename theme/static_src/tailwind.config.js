@@ -58,6 +58,15 @@ module.exports = {
     ],
 
     daisyui: {
-        themes: ["light", "dark"],
+        themes: [
+            {
+                light : {
+                    ...require("daisyui/src/theming/themes")["light"],
+                    primary: "#E5BA73",
+                }
+            }
+        ],
     },
 }
+// #E5BA73
+// #8A6E58
