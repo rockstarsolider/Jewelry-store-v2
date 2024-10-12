@@ -22,4 +22,6 @@ class QuestionForm(forms.ModelForm):
         question_text = self.cleaned_data.get('question_text')
         if not question_text:
             raise forms.ValidationError("سوال خود را بنویسید")  
+        if len(question_text) < 12:  
+            raise forms.ValidationError("متن سوال باید حداقل 12 حرف باشد")  
         return question_text
