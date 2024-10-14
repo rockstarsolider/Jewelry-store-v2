@@ -59,7 +59,7 @@ class ProductAdmin(ImportExportModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     search_fields = ("name",)
-    list_display = ('name','image')
+    list_display = ('name','image_tag',)
     actions = ('delete_image',)
 
     def delete_image(self, request, queryset):
@@ -67,25 +67,39 @@ class CategoryAdmin(admin.ModelAdmin):
         self.message_user(request, "تصاویر دسته بندی های انتخاب شده حذف شدند")
     delete_image.short_description = "حذف تصویر دسته بندی های انتخاب شده"
 
+    def image_tag(self,obj):
+        return format_html('<img src="{0}" style="width: 32px; height:32px" />'.format(obj.image.url))
+    image_tag.short_description = 'تصویر'
+
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('image_field','product_id', 'datetime')
+    list_display = ('image_tag','product_id', 'datetime')
     search_fields = ("product_id",'image_field')
     list_filter = ('uploaded_at','product_id')
+    list_display_links = ('product_id', 'image_tag')
 
     def datetime(self, obj):
         return translate_number(format_persian_datetime(convert_to_persian_calendar(obj.uploaded_at)))
     datetime.short_description = 'آپلود شده در'
+
+    def image_tag(self,obj):
+        return format_html('<img src="{0}" style="width: 32px; height:32px;" />'.format(obj.image_field.url))
+    image_tag.short_description = 'تصویر'
 
 
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('video','product_id', 'datetime')
+    list_display = ('video_tag','product_id', 'datetime')
     search_fields = ("product_id",'video')
     list_filter = ('uploaded_at','product_id')
+    list_display_links = ('product_id', 'video_tag')
 
     def datetime(self, obj):
         return translate_number(format_persian_datetime(convert_to_persian_calendar(obj.uploaded_at)))
     datetime.short_description = 'آپلود شده در'
+
+    def video_tag(self,obj):
+        return format_html('<video src="{0}" style="width: 32px; height:32px;" />'.format(obj.video.url))
+    video_tag.short_description = 'تصویر'
 
 
 admin.site.register(Category, CategoryAdmin)
