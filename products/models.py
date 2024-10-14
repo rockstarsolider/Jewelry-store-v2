@@ -6,8 +6,8 @@ from custom_translate.templatetags.custom_translation_tags import translate_numb
 
 # Category of product
 class Category(models.Model):
-    name = models.CharField(max_length=100, verbose_name=('نام دسته بندی'))
-    image = models.ImageField(upload_to='category/', default='/default.png', verbose_name=('تصویر'))
+    name = models.CharField(max_length=100, verbose_name='نام دسته بندی')
+    image = models.ImageField(upload_to='category/', default='/default.png', verbose_name='تصویر')
     
     class Meta:
         verbose_name_plural = "دسته بندی ها"
@@ -18,16 +18,16 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category_id = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='products', verbose_name=('دسته بندی'))
-    name = models.CharField(max_length=75, verbose_name=('نام محصول'))
-    description = models.TextField(blank=True, null=True, verbose_name=('توضیحات'))
-    price = models.PositiveIntegerField(verbose_name=('قیمت'))
-    image = models.ImageField(upload_to='product/', default='/default.png', verbose_name=('تصویر اصلی'))
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=('منتشر شده در '))
-    material = models.CharField(max_length=50, null=True, blank=True, verbose_name=('جنس'))
-    weight = models.CharField(max_length=50, null=True, blank=True, verbose_name=('وزن'))
-    color = models.CharField(max_length=50, null=True, blank=True, verbose_name=('رنگ'))
-    carat = models.CharField(max_length=50, null=True, blank=True, verbose_name=('عیار'))
+    category_id = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='products', verbose_name='دسته بندی')
+    name = models.CharField(max_length=75, verbose_name='نام محصول')
+    description = models.TextField(blank=True, null=True, verbose_name='توضیحات')
+    price = models.PositiveIntegerField(verbose_name='قیمت')
+    image = models.ImageField(upload_to='product/', default='/default.png', verbose_name='تصویر اصلی')
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, verbose_name='منتشر شده در ')
+    material = models.CharField(max_length=50, null=True, blank=True, verbose_name='جنس')
+    weight = models.CharField(max_length=50, null=True, blank=True, verbose_name='وزن')
+    color = models.CharField(max_length=50, null=True, blank=True, verbose_name='رنگ')
+    carat = models.CharField(max_length=50, null=True, blank=True, verbose_name='عیار')
     
     class Meta:
         verbose_name_plural = "محصولات"
@@ -47,9 +47,9 @@ class Product(models.Model):
 
 # Images for products
 class Image(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', verbose_name=('نام محصول'))
-    image_field = models.ImageField(upload_to='product/', verbose_name=('تصویر'))
-    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name=('بارگذاری شده در '))
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', verbose_name='نام محصول')
+    image_field = models.ImageField(upload_to='product/', verbose_name='تصویر')
+    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name='بارگذاری شده در ')
     
     class Meta:
         verbose_name_plural = "تصاویر"
@@ -58,9 +58,9 @@ class Image(models.Model):
 
 # Videos for products
 class Video(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='videos', verbose_name=('نام محصول'))
-    video = models.FileField(upload_to='product/', verbose_name=('ویدیو'), validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])])
-    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name=('بارگذاری شده در '))
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='videos', verbose_name='نام محصول')
+    video = models.FileField(upload_to='product/', verbose_name='ویدیو', validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])])
+    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name='بارگذاری شده در ')
     
     class Meta:
         verbose_name_plural = "ویدیو ها"
@@ -73,3 +73,7 @@ class PhoneNumber(models.Model):
 
     def __str__(self):  
         return self.phone_number
+    
+    class Meta:
+        verbose_name_plural = "شماره تلفن ها"
+        verbose_name = "شماره تلفن"

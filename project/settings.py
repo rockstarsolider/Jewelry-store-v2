@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'django_browser_reload',
     "debug_toolbar",
     "django_htmx",
-    'django_filters',
     'widget_tweaks',
 ]
 
@@ -169,5 +168,4 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 # Languages available on admin page
 LANGUAGES = [  
     ('fa', _('Farsi')),  
-    ('en', _('English')),   
 ]  

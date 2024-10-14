@@ -17,10 +17,12 @@ class PhoneNumberForm(forms.Form):
 
         # Example of basic validation (check if it only contains digits)  
         if not re.match(r'^[0-9]+$', phone_number):  
-            raise ValidationError('Phone number must contain only digits.')  
+            raise ValidationError('شماره تلفن باید فقط عدد باشد')  
 
         # Additional validation (e.g., length check)  
         if len(phone_number) < 10:  
-            raise ValidationError('Phone number must be at least 10 digits long.')  
+            raise ValidationError('شماره تلفن باید بیشتر از 10 رقم باشد')  
+        if len(phone_number) > 13:  
+            raise ValidationError('شماره تلفن باید کمتر از 13 رقم باشد')  
 
         return phone_number 

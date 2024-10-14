@@ -10,10 +10,6 @@ from django.contrib.auth.models import User, Group
 from admin_interface.models import Theme
 from django.utils.html import format_html
 
-admin.site.unregister(User)
-admin.site.unregister(Group)
-admin.site.unregister(Theme)
-
 # This function translates numbers to persian. e.g. 25 => ۲۵
 def fa_num(num):
     return translate_number(f'{num:,}')
