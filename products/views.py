@@ -28,12 +28,12 @@ class ProductsView(View):   # Products page
         if selected_category:  
             products = products.filter(category_id__name=selected_category)
         page_number = request.GET.get('page', 1)  # Default to the first page  
-        paginator = Paginator(products, 2)
+        paginator = Paginator(products, 20)
         page = paginator.page(page_number)
         context = {
             'form': PhoneNumberForm(),
             'page': page,
-            'pagination_count': round(paginator.count / 2),
+            'pagination_count': round(paginator.count / 20),
             'categories': categories,
             'selected_category': selected_category or '',
             'order': order
