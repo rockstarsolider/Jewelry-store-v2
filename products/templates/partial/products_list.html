@@ -1,4 +1,15 @@
-{% if products %}
+{% if page %}
+    <ul class="flex flex-wrap items-start justify-between lg:justify-start gap-5 lg:gap-10 w-full lg:pt-12 pt-8">
+        {% for product in page %}
+            <div hx-get="{% url 'product' product.id %}" hx-target="body" hx-push-url="true" class="w-36 lg:w-44 cursor-pointer">
+                <img class="h-36 lg:h-44 object-cover shadow-lg rounded-lg" src="{{product.image.url}}"/>
+                <h2 class="pt-2 font-medium text-lg">{{product.name}}</h2>
+                <p>{{product.formatted_price }} تومان</p>
+            </div>
+        {% endfor %}
+    </ul>
+{% elif products %}
+
 <ul class="flex flex-wrap items-start justify-between lg:justify-start gap-5 lg:gap-10 w-full lg:pt-12 pt-8">
     {% for product in products %}
         <div hx-get="{% url 'product' product.id %}" hx-target="body" hx-push-url="true" class="w-36 lg:w-44 cursor-pointer">
@@ -8,6 +19,7 @@
         </div>
     {% endfor %}
 </ul>
+
 {% else %}
 <p class="font-medium text-lg pt-10">هیچ محصولی یافت نشد!</p>
 {% endif %}

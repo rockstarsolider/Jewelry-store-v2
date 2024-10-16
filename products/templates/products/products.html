@@ -11,7 +11,7 @@
         </ul>
     </div>
 
-    <div class="flex flex-col lg:flex-row px-6 lg:px-12 2xl:px-[20%] gap-5">
+    <div class="flex flex-col lg:flex-row px-6 lg:px-12 2xl:px-[20%] gap-5 pt-6">
         <!-- Category Filter --> 
         <select id="category-filter" class="select select-bordered max-w-56"   
                 name="category"
@@ -37,6 +37,13 @@
     <div class="px-6 lg:px-12 2xl:px-[20%] flex flex-col items-center" id="product_con">
         {% include 'partial/products_list.html'  %}
     </div>
+    
+    <!-- Paginator -->
+    <div dir='ltr' class="join pt-8 w-full justify-center px-6 lg:px-12 2xl:px-[20%]">
+        <button id='prev' class="join-item btn" onclick='prev()'>«</button>
+        <div class="join-item btn"><span>{{pagination_count}}</span> از <span>{{page.number}}<span/> صفحه </div>
+        <button id='next' class="join-item btn" onclick='next()'>»</button>
+    </div>
 
     <!-- Subscribe -->
     <div class="pt-28 pb-10 w-full flex flex-col justify-center items-center" id="subscribe">
@@ -53,31 +60,54 @@
     function updateURL() {  
         const category = document.getElementById('category-filter').value;  
         const order = document.getElementById('order-select').value;  
-
-        // Create a new URL object with the current location's origin  
         const url = new URL(window.location);  
 
-        // Set or update the category parameter  
         if (category) {  
             url.searchParams.set('category', category);  
+            url.searchParams.set('page', 1);
         } else {  
             url.searchParams.delete('category');  
         }  
 
-        // Set or update the order parameter  
         if (order) {  
-            url.searchParams.set('order', order);  
+            url.searchParams.set('order', order);
+            url.searchParams.set('page', 1); 
         } else {  
             url.searchParams.delete('order');  
-        }  
+        }
+ 
+        htmxRequest(url) 
+    }
 
-        // Replace the URL in the browser  
+    function next() { 
+        const nextBtn = document.getElementById('next');
+        const url = new URL(window.location);
+
+        var currentPage = url.searchParams.get('page') ? parseInt(url.searchParams.get('page')) : 1
+        {% if page.has_next %}
+            url.searchParams.set('page', currentPage+1);
+        {% endif %} 
+
+        htmxRequest(url)
+    }
+
+    function prev() {
+        const prevBtn = document.getElementById('prev');  
+        const url = new URL(window.location);
+
+        var currentPage = url.searchParams.get('page') ? parseInt(url.searchParams.get('page')) : 1
+        if (currentPage != 1){
+            url.searchParams.set('page', currentPage-1);
+        }
+
+        htmxRequest(url)
+    }
+
+    function htmxRequest(url) {
         window.history.pushState({}, '', url);  
-
-        // Trigger the HTMX request to fetch new products  
         var productsUrl = "{% url 'products' %}?" + url.searchParams.toString();  
-        htmx.ajax('GET', productsUrl, { target: '#product-list' });  
-    }  
+        htmx.ajax('GET', productsUrl, { target: '#product-list' }); 
+    }
 </script> 
 
 {% endblock %}

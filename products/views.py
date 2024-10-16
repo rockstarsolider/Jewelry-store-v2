@@ -4,7 +4,7 @@ from .models import Product, Category, Image, Video
 from django.db import models
 from .forms import PhoneNumberForm  
 from .models import PhoneNumber
-from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 # Create your views here.
 class HomeView(View):
@@ -27,9 +27,13 @@ class ProductsView(View):   # Products page
         categories = Category.objects.all()[:20]
         if selected_category:  
             products = products.filter(category_id__name=selected_category)
+        page_number = request.GET.get('page', 1)  # Default to the first page  
+        paginator = Paginator(products, 2)
+        page = paginator.page(page_number)
         context = {
             'form': PhoneNumberForm(),
-            'products': products,
+            'page': page,
+            'pagination_count': round(paginator.count / 2),
             'categories': categories,
             'selected_category': selected_category or '',
             'order': order
@@ -42,7 +46,7 @@ class AboutUsView(View):
         return render(request, 'products/about_us.html')
     
 
-# Detail of a product
+# Details of a product
 class ProductView(View):
     def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
