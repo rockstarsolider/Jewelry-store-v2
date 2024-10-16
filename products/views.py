@@ -33,7 +33,7 @@ class ProductsView(View):   # Products page
         context = {
             'form': PhoneNumberForm(),
             'page': page,
-            'pagination_count': round(paginator.count / 20),
+            'pagination_count': paginator.num_pages,
             'categories': categories,
             'selected_category': selected_category or '',
             'order': order
