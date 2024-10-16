@@ -62,13 +62,13 @@
         <h2 class="text-4xl font-medium pt-4 text-center">کالکشن ها</h2>
         <div class="flex flex-wrap w-full gap-5 justify-center pt-10">
             {% for category in categories %}
-                <div hx-get="{% url 'products' %}?category={{category.name}}" hx-target="body" hx-push-url="true" class="flex justify-between w-80 p-3 items-start shadow-md hover:shadow-lg">
+                <div hx-get="{% url 'products' %}?category={{category.name}}" hx-target="body" hx-push-url="true" class="flex cursor-pointer rounded-lg justify-between w-80 p-3 items-start shadow-md hover:shadow-lg">
                     <div class="flex gap-4 w-1/2 items-center">
                         <p class='font-medium text-xl'>{{category.name}}</p>
                         <p class="bg-neutral text-white rounded-full size-8 flex items-center justify-center">{{category.product_count}}</p>
                     </div>
                     <div class=" w-1/2">
-                        <img class="size-40 object-fill" src="media/{{category.image}}"/>
+                        <img class="size-40 object-fill" src="{{category.image.url}}"/>
                     </div>
                 </div>
             {% endfor %}
@@ -94,7 +94,7 @@
                 </svg>                  
             </button>
         </div>
-        <img class="w-full lg:w-[50%] object-fill" src="{% static 'image/gift.webp' %}"/>
+        <img class="w-full lg:w-[50%] object-fill rounded-lg" src="{% static 'image/gift.webp' %}"/>
     </div>
 
     <!-- Subscribe -->
@@ -103,7 +103,7 @@
     </div>
 
     <!-- Aboat Us Section -->
-    <div class="mt-32 px-10 py-24 w-full flex flex-col justify-center items-start lg:px-20 2xl:px-[20%]" style="background-image: url('static/image/home3.jpg');">
+    <div class="mt-32 px-10 py-24 w-full flex flex-col justify-center items-start lg:px-20 2xl:px-[20%]" style="background-image: url({% static 'image/home3.jpg'%});">
         <div class="p-10 flex flex-col justify-center items-start bg-primary text-white max-w-96 rounded-xl">
             <h2 class="font-medium text-3xl">ما چه کسی هستیم</h2>
             <p class="text-lg pt-2"> جواهرات پاندورا در سال ۱۹۹۱ توسط آقای انیل داناک تأسیس شد. آقای داناک، پیشگام این عرصه با سابقه تجاری بسیار غنی، تا قبل از تأسیس کَنز، مدیریت کسب‌وکار مشترک خانوادگی جواهرات خود را در دبی بر عهده داشت. سپس، کاملاً به تنهایی و از صفر، شرکت پاندورا را راه‌اندازی کرد.</p>

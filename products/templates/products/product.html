@@ -15,14 +15,14 @@
             <div class="relative">  
                 <!-- Carousel Main Image -->  
                 <div id="main_image_con" class="overflow-hidden">  
-                    <img id="main-image" class="mx-auto object-cover w-full h-96 transition-opacity duration-300 rounded-lg" src="/media/{{ product.image }}">  
+                    <img id="main-image" class="mx-auto object-cover w-full transition-opacity duration-300 rounded-lg" src="{{ product.image.url }}">  
                 </div> 
             </div>  
         
             <!-- Thumbnails -->  
             <div class="flex gap-2 mt-4 w-full overflow-x-auto overflow-y-hidden">  
                 <img class="thumbnail cursor-pointer w-28 h-28 object-cover rounded-lg border transition-transform duration-300 hover:scale-110"   
-                        src="{{ product.image.url }}"   
+                        src="{{ product.image.url }}"
                         onclick="changeImage('{{ product.image.url }}','image')"> 
                 
                 {% for image in images %}  
@@ -150,11 +150,11 @@
         const mainImageCon = document.getElementById('main_image_con')  
         if (type == 'video'){
             mainImageCon.innerHTML = 
-                `<video controls autoplay onclick="changeImage('${imageUrl}')" class="mx-auto object-cover w-full h-96 transition-opacity duration-300 rounded-lg">
+                `<video controls autoplay onclick="changeImage('${imageUrl}')" class="mx-auto object-cover w-full transition-opacity duration-300 rounded-lg">
                     <source src="${imageUrl}" type="video/mp4">
                 </video> `
         } else if (type == 'image') {
-            mainImageCon.innerHTML = `<img id="main-image" class="mx-auto object-cover w-full h-96 transition-opacity duration-300 rounded-lg" src="${imageUrl}">`
+            mainImageCon.innerHTML = `<img id="main-image" class="mx-auto object-cover w-full transition-opacity duration-300 rounded-lg" src="${imageUrl}">`
         }
     }  
 </script>  
